@@ -1,0 +1,24 @@
+{
+  "name": "runts",
+  "productName": "RunTS",
+  "version": "0.1.0",
+  "description": "JavaScript/TypeScript playground for macOS",
+  "main": "src/main/main.js",
+  "author": "이원국",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@types/node": "^26.6.4",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3",
+    "esbuild": "^0.28.2",
+    "monaco-editor": "^0.57.0"
+  },
+  "packageManager": "yarn@4.12.0"
+}
