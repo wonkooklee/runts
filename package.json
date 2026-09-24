@@ -8,6 +8,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "build:renderer": "node scripts/build-renderer.mjs",
+    "dev": "node scripts/build-renderer.mjs && electron .",
+    "start": "electron .",
     "test": "node --test test/*.test.js"
   },
   "dependencies": {
