@@ -47,6 +47,7 @@ function sharedOptions() {
     wordWrap: settings.wordWrap ? 'on' : 'off',
     scrollbar: { verticalScrollbarSize: 10, horizontalScrollbarSize: 10, useShadows: false },
     overviewRulerBorder: false,
+    editContext: false,
   };
 }
 
