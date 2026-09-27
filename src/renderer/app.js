@@ -608,6 +608,34 @@ function bindCommands(dialogs) {
   });
 
   api.onFileOpened(openFileTab);
+  setupFileDrop();
+}
+
+function setupFileDrop() {
+  const hasFiles = (e) => e.dataTransfer && [...e.dataTransfer.types].includes('Files');
+  window.addEventListener(
+    'dragover',
+    (e) => {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+      e.stopPropagation();
+      e.dataTransfer.dropEffect = 'copy';
+    },
+    true,
+  );
+  window.addEventListener(
+    'drop',
+    async (e) => {
+      if (!hasFiles(e)) return;
+      e.preventDefault();
+      e.stopPropagation();
+      for (const file of e.dataTransfer.files) {
+        const tab = await api.readDroppedFile(file);
+        if (tab) openFileTab(tab);
+      }
+    },
+    true,
+  );
 }
 
 async function main() {

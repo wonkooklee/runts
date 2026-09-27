@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer, webUtils } = require('electron');
 
 const on = (channel) => (fn) => {
   const listener = (_e, payload) => fn(payload);
@@ -28,6 +28,7 @@ contextBridge.exposeInMainWorld('runts', {
   onPackagesLog: on('packages:log'),
 
   openFile: () => ipcRenderer.invoke('file:open'),
+  readDroppedFile: (file) => ipcRenderer.invoke('file:read', webUtils.getPathForFile(file)),
   saveFile: (payload) => ipcRenderer.invoke('file:save', payload),
   onFileOpened: on('file:opened'),
 

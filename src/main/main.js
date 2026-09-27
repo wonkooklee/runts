@@ -132,6 +132,10 @@ function registerIpc() {
     });
     return res.canceled ? [] : res.filePaths.map(readFileTab);
   });
+  ipcMain.handle('file:read', (_e, filePath) => {
+    if (!filePath || !/\.[cm]?[jt]sx?$/.test(filePath)) return null;
+    return readFileTab(filePath);
+  });
   ipcMain.handle('file:save', async (_e, { code, filePath, name, lang, saveAs }) => {
     let target = filePath;
     if (!target || saveAs) {
