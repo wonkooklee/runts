@@ -19,7 +19,6 @@ contextBridge.exposeInMainWorld('runts', {
   onRunExit: on('run:exit'),
   onRunStopped: on('run:stopped'),
 
-  nodeTypes: () => ipcRenderer.invoke('types:node'),
   listPackages: () => ipcRenderer.invoke('packages:list'),
   packageTypes: () => ipcRenderer.invoke('packages:types'),
   installPackages: (names) => ipcRenderer.invoke('packages:install', names),

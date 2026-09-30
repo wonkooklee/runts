@@ -4,7 +4,7 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { app, BrowserWindow, Menu, dialog, ipcMain, nativeTheme, net, protocol, shell } = require('electron');
 const { Runner } = require('./runner');
-const { Packages, collectDts } = require('./packages');
+const { Packages } = require('./packages');
 const { Store, parseEnv } = require('./store');
 const { buildMenu } = require('./menu');
 
@@ -46,15 +46,6 @@ function openFiles(paths) {
       dialog.showErrorBox('파일을 열 수 없습니다', `${p}\n${err.message}`);
     }
   }
-}
-
-function nodeTypeLibs() {
-  const libs = [];
-  for (const name of ['@types/node', 'undici-types']) {
-    const root = path.dirname(require.resolve(`${name}/package.json`));
-    collectDts(root, `file:///node_modules/${name}`, libs);
-  }
-  return libs;
 }
 
 function createWindow() {
@@ -118,7 +109,6 @@ function registerIpc() {
     if (runner.stop()) send('run:stopped', {});
   });
 
-  ipcMain.handle('types:node', () => nodeTypeLibs());
   ipcMain.handle('packages:list', () => packages.list());
   ipcMain.handle('packages:types', () => packages.typeFiles());
   ipcMain.handle('packages:install', (_e, names) => packages.install(names, (s) => send('packages:log', s)));

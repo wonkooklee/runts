@@ -525,7 +525,7 @@ function setupDivider() {
 }
 
 async function loadTypes() {
-  const [nodeLibs, pkgLibs] = await Promise.all([api.nodeTypes(), api.packageTypes()]);
+  const [nodeLibs, pkgLibs] = await Promise.all([fetch('./node-types.json').then((r) => r.json()), api.packageTypes()]);
   setTypeLibs([...nodeLibs, ...pkgLibs]);
 }
 

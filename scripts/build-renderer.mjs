@@ -1,5 +1,6 @@
 import { build, context } from 'esbuild';
-import { cpSync, mkdirSync, rmSync } from 'node:fs';
+import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -10,6 +11,14 @@ const watch = process.argv.includes('--watch');
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 cpSync(join(root, 'src/renderer/index.html'), join(out, 'index.html'));
+
+const require = createRequire(import.meta.url);
+const { collectDts } = require('../src/main/packages.js');
+const nodeTypes = [];
+for (const name of ['@types/node', 'undici-types']) {
+  collectDts(dirname(require.resolve(`${name}/package.json`)), `file:///node_modules/${name}`, nodeTypes);
+}
+writeFileSync(join(out, 'node-types.json'), JSON.stringify(nodeTypes));
 
 const common = {
   bundle: true,

@@ -16,10 +16,10 @@
     "dist": "yarn build:renderer && electron-builder"
   },
   "dependencies": {
-    "@types/node": "^26.6.4",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@types/node": "^26.6.4",
     "electron": "^44.5.1",
     "electron-builder": "^26.15.3",
     "esbuild": "^0.28.2",
