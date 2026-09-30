@@ -11,7 +11,9 @@
     "build:renderer": "node scripts/build-renderer.mjs",
     "dev": "node scripts/build-renderer.mjs && electron .",
     "start": "electron .",
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "package": "yarn build:renderer && electron-builder --dir",
+    "dist": "yarn build:renderer && electron-builder"
   },
   "dependencies": {
     "@types/node": "^26.6.4",
@@ -23,5 +25,48 @@
     "esbuild": "^0.28.2",
     "monaco-editor": "^0.57.0"
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.12.0",
+  "build": {
+    "appId": "com.wonkooklee.runts",
+    "productName": "RunTS",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/main/**",
+      "dist/renderer/**",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.developer-tools",
+      "icon": "build/icon.icns",
+      "identity": "-",
+      "hardenedRuntime": false,
+      "darkModeSupport": true
+    },
+    "fileAssociations": [
+      {
+        "ext": [
+          "js",
+          "mjs",
+          "cjs",
+          "ts",
+          "mts",
+          "cts"
+        ],
+        "name": "JavaScript or TypeScript source",
+        "role": "Editor",
+        "rank": "Alternate"
+      }
+    ]
+  }
 }
