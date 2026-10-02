@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "JavaScript/TypeScript playground for macOS",
   "main": "src/main/main.js",
-  "author": "이원국",
+  "author": "Wonkook Lee",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -29,6 +29,7 @@
   "build": {
     "appId": "com.wonkooklee.runts",
     "productName": "RunTS",
+    "copyright": "Copyright © 2026 Wonkook Lee",
     "directories": {
       "output": "release",
       "buildResources": "build"
