@@ -43,7 +43,8 @@
         {
           "target": "dmg",
           "arch": [
-            "arm64"
+            "arm64",
+            "x64"
           ]
         }
       ],
@@ -67,6 +68,7 @@
         "role": "Editor",
         "rank": "Alternate"
       }
-    ]
+    ],
+    "artifactName": "${productName}-${version}-${arch}.${ext}"
   }
 }
