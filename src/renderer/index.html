@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -12,10 +12,10 @@
   <body>
     <header id="titlebar">
       <div id="tabs" role="tablist"></div>
-      <button id="new-tab" class="icon-btn" title="새 탭 (⌘T)">+</button>
+      <button id="new-tab" class="icon-btn" title="New Tab (⌘T)">+</button>
       <div class="titlebar-spacer"></div>
-      <button id="run-btn" class="run-btn" title="실행 (⌘R)">▶ 실행</button>
-      <button id="stop-btn" class="run-btn stop" title="중지 (⌘.)" hidden>■ 중지</button>
+      <button id="run-btn" class="run-btn" title="Run (⌘R)">▶ Run</button>
+      <button id="stop-btn" class="run-btn stop" title="Stop (⌘.)" hidden>■ Stop</button>
     </header>
 
     <main id="workspace" class="horizontal">
@@ -25,59 +25,59 @@
     </main>
 
     <footer id="statusbar">
-      <button id="lang-btn" class="status-btn" title="언어 전환 (⌘⇧L)">TypeScript</button>
+      <button id="lang-btn" class="status-btn" title="Switch Language (⇧⌘L)">TypeScript</button>
       <span id="run-status" class="status-text"></span>
       <div class="status-spacer"></div>
-      <label class="status-toggle" title="자동 실행 (⌘⇧R)">
-        <input type="checkbox" id="autorun-toggle" /> 자동 실행
+      <label class="status-toggle" title="Auto-Run (⇧⌘R)">
+        <input type="checkbox" id="autorun-toggle" /> Auto-run
       </label>
-      <button id="layout-btn" class="status-btn" title="배치 전환 (⌘\)">⇆</button>
-      <button id="packages-btn" class="status-btn" title="npm 패키지 (⌘⇧P)">패키지</button>
-      <button id="settings-btn" class="status-btn" title="설정 (⌘,)">⚙︎</button>
+      <button id="layout-btn" class="status-btn" title="Toggle Layout (⌘\)">⇆</button>
+      <button id="packages-btn" class="status-btn" title="npm Packages (⇧⌘P)">Packages</button>
+      <button id="settings-btn" class="status-btn" title="Settings (⌘,)">⚙︎</button>
       <span id="node-version" class="status-text dim"></span>
     </footer>
 
     <div id="modal-backdrop" hidden>
       <div id="packages-modal" class="modal" role="dialog" aria-labelledby="packages-title" hidden>
         <div class="modal-head">
-          <h2 id="packages-title">npm 패키지</h2>
-          <button class="icon-btn modal-close" title="닫기 (Esc)">×</button>
+          <h2 id="packages-title">npm Packages</h2>
+          <button class="icon-btn modal-close" title="Close (Esc)">×</button>
         </div>
         <form id="install-form" class="row">
           <input id="install-input" type="text" placeholder="lodash dayjs@1 zod" autocomplete="off" spellcheck="false" />
-          <button id="install-btn" type="submit" class="primary">설치</button>
+          <button id="install-btn" type="submit" class="primary">Install</button>
         </form>
-        <p class="hint">import / require 로 바로 쓸 수 있습니다. 타입 정의가 있으면 자동완성도 됩니다.</p>
+        <p class="hint">Installed packages are available to import and require right away. Bundled type definitions power completion.</p>
         <ul id="package-list"></ul>
         <pre id="package-log" hidden></pre>
         <div class="modal-foot">
-          <button id="reveal-packages" class="link-btn">설치 폴더 열기</button>
+          <button id="reveal-packages" class="link-btn">Show in Finder</button>
         </div>
       </div>
 
       <div id="settings-modal" class="modal" role="dialog" aria-labelledby="settings-title" hidden>
         <div class="modal-head">
-          <h2 id="settings-title">설정</h2>
-          <button class="icon-btn modal-close" title="닫기 (Esc)">×</button>
+          <h2 id="settings-title">Settings</h2>
+          <button class="icon-btn modal-close" title="Close (Esc)">×</button>
         </div>
         <form id="settings-form" class="settings">
-          <label>테마
+          <label>Theme
             <select name="theme">
-              <option value="system">시스템</option>
-              <option value="dark">다크</option>
-              <option value="light">라이트</option>
+              <option value="system">System</option>
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
             </select>
           </label>
-          <label>글자 크기 <input name="fontSize" type="number" min="9" max="32" /></label>
-          <label>자동 실행 지연(ms) <input name="autoRunDelay" type="number" min="0" max="5000" step="50" /></label>
-          <label>객체 출력 깊이 <input name="inspectDepth" type="number" min="0" max="20" /></label>
-          <label class="check"><input name="autoRun" type="checkbox" /> 입력하면 자동 실행</label>
-          <label class="check"><input name="alignResults" type="checkbox" /> 결과를 코드 줄에 맞춰 정렬</label>
-          <label class="check"><input name="showUndefined" type="checkbox" /> undefined 결과 표시</label>
-          <label class="check"><input name="lineNumbers" type="checkbox" /> 줄 번호</label>
-          <label class="check"><input name="wordWrap" type="checkbox" /> 자동 줄바꿈</label>
-          <label class="check"><input name="minimap" type="checkbox" /> 미니맵</label>
-          <label class="wide">환경 변수 <small>KEY=VALUE, 한 줄에 하나 (process.env)</small>
+          <label>Font size <input name="fontSize" type="number" min="9" max="32" /></label>
+          <label>Auto-run delay (ms) <input name="autoRunDelay" type="number" min="0" max="5000" step="50" /></label>
+          <label>Inspect depth <input name="inspectDepth" type="number" min="0" max="20" /></label>
+          <label class="check"><input name="autoRun" type="checkbox" /> Run automatically while typing</label>
+          <label class="check"><input name="alignResults" type="checkbox" /> Align results with source lines</label>
+          <label class="check"><input name="showUndefined" type="checkbox" /> Show undefined results</label>
+          <label class="check"><input name="lineNumbers" type="checkbox" /> Line numbers</label>
+          <label class="check"><input name="wordWrap" type="checkbox" /> Word wrap</label>
+          <label class="check"><input name="minimap" type="checkbox" /> Minimap</label>
+          <label class="wide">Environment variables <small>One KEY=VALUE per line, exposed as process.env</small>
             <textarea name="env" rows="5" spellcheck="false" placeholder="API_URL=https://example.com"></textarea>
           </label>
         </form>

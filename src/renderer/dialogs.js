@@ -49,7 +49,7 @@ export function setupDialogs({ api, getSettings, onSettingsChange, onPackagesCha
   function setBusy(value) {
     busy = value;
     installBtn.disabled = value;
-    installBtn.textContent = value ? '설치 중…' : '설치';
+    installBtn.textContent = value ? 'Installing…' : 'Install';
     list.querySelectorAll('button').forEach((b) => (b.disabled = value));
   }
 
@@ -64,16 +64,16 @@ export function setupDialogs({ api, getSettings, onSettingsChange, onPackagesCha
             name.textContent = p.name;
             const version = document.createElement('span');
             version.className = 'pkg-version';
-            version.textContent = p.version ? `v${p.version}` : '설치 안 됨';
+            version.textContent = p.version ? `v${p.version}` : 'not installed';
             const remove = document.createElement('button');
             remove.className = 'link-btn danger';
-            remove.textContent = '제거';
+            remove.textContent = 'Remove';
             remove.disabled = busy;
             remove.addEventListener('click', () => runNpm(() => api.uninstallPackage(p.name)));
             li.append(name, version, remove);
             return li;
           })
-        : [Object.assign(document.createElement('li'), { className: 'empty', textContent: '설치된 패키지가 없습니다' })]),
+        : [Object.assign(document.createElement('li'), { className: 'empty', textContent: 'No packages installed' })]),
     );
   }
 
@@ -83,7 +83,7 @@ export function setupDialogs({ api, getSettings, onSettingsChange, onPackagesCha
     log.textContent = '';
     log.hidden = false;
     const ok = await task();
-    log.textContent += ok ? '\n완료\n' : '\n실패했습니다. 위 로그를 확인하세요.\n';
+    log.textContent += ok ? '\nDone\n' : '\nFailed. See the log above.\n';
     log.scrollTop = log.scrollHeight;
     setBusy(false);
     await refreshList();

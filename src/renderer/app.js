@@ -89,7 +89,7 @@ function createEditors() {
     hideCursorInOverviewRuler: true,
     overviewRulerLanes: 0,
     contextmenu: false,
-    readOnlyMessage: { value: '출력 영역은 편집할 수 없습니다' },
+    readOnlyMessage: { value: 'The output pane is read-only' },
   });
   outDecorations = outEditor.createDecorationsCollection([]);
 
@@ -183,7 +183,7 @@ function closeTab(id) {
   if (!tab) return;
   const unsavedFile = tab.filePath && !tab.saved;
   const scratch = !tab.filePath && tab.code.trim();
-  if ((unsavedFile || scratch) && !window.confirm(`'${tab.name}' 탭을 닫을까요? 저장하지 않은 내용은 사라집니다.`)) return;
+  if ((unsavedFile || scratch) && !window.confirm(`Close '${tab.name}'? Unsaved changes will be lost.`)) return;
   const index = tabs.indexOf(tab);
   tabs.splice(index, 1);
   models.get(id)?.dispose();
@@ -248,7 +248,7 @@ function renderTabs() {
       const close = document.createElement('button');
       close.className = 'tab-close';
       close.textContent = tab.filePath && !tab.saved ? '●' : '×';
-      close.title = '탭 닫기 (⌘W)';
+      close.title = 'Close Tab (⌘W)';
 
       el.append(lang, name, close);
       el.addEventListener('mousedown', (e) => {
@@ -356,7 +356,7 @@ function bindRunEvents() {
       queueRender();
     }, 250);
     setRunning(true);
-    setStatus('실행 중…', 'running');
+    setStatus('Running…', 'running');
   });
 
   api.onRunOutput(({ runId, items }) => {
@@ -371,22 +371,22 @@ function bindRunEvents() {
     applyPendingClear();
     setRunning(false);
     const errors = errorCount(runTabId);
-    if (syntaxError) setStatus('구문 오류', 'error');
-    else if (errors) setStatus(`오류 ${errors}개 · ${ms}ms`, 'error');
-    else setStatus(`완료 · ${ms}ms`, 'ok');
+    if (syntaxError) setStatus('Syntax error', 'error');
+    else if (errors) setStatus(`${errors} ${errors === 1 ? 'error' : 'errors'} · ${ms} ms`, 'error');
+    else setStatus(`Done · ${ms} ms`, 'ok');
     queueRender();
   });
 
   api.onRunExit(({ runId, exitCode }) => {
     if (runId !== currentRunId) return;
     setRunning(false);
-    setStatus(`프로세스 종료 (코드 ${exitCode})`, 'error');
+    setStatus(`Process exited (code ${exitCode})`, 'error');
   });
 
   api.onRunStopped(() => {
     applyPendingClear();
     setRunning(false);
-    setStatus('중지됨', '');
+    setStatus('Stopped', '');
     queueRender();
   });
 }
