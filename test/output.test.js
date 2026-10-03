@@ -3,7 +3,7 @@ const assert = require('node:assert');
 
 const load = () => import('../src/renderer/output.js');
 
-test('정렬 모드에서 결과를 코드 줄에 맞춘다', async () => {
+test('aligns results with source lines', async () => {
   const { layoutOutput } = await load();
   const { text } = layoutOutput(
     [
@@ -15,7 +15,7 @@ test('정렬 모드에서 결과를 코드 줄에 맞춘다', async () => {
   assert.strictEqual(text, '1\n\n3');
 });
 
-test('같은 줄의 여러 출력과 여러 줄 출력은 아래로 밀어낸다', async () => {
+test('pushes repeated and multi-line output downward', async () => {
   const { layoutOutput } = await load();
   const { text, kinds } = layoutOutput(
     [
@@ -30,7 +30,7 @@ test('같은 줄의 여러 출력과 여러 줄 출력은 아래로 밀어낸다
   assert.deepStrictEqual(kinds, [null, 'log', 'log', 'error', 'result', 'result', 'result']);
 });
 
-test('정렬을 끄면 도착 순서대로 쌓는다', async () => {
+test('stacks output in arrival order when alignment is off', async () => {
   const { layoutOutput } = await load();
   const { text } = layoutOutput(
     [
