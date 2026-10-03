@@ -22,9 +22,6 @@
 
 RunTS is inspired by [RunJS](https://runjs.app). It is built with Electron and the Monaco editor, and your code runs on the Node.js runtime bundled with the app (Node 24 in Electron 44), so Node APIs such as `fs` and `fetch` and packages from npm work as they do in a script.
 
-> [!NOTE]
-> The user interface is currently in Korean.
-
 ## Features
 
 - **Live evaluation.** Code runs 300 ms after you stop typing. The delay is configurable, and with auto-run off you run code with ⌘R or ⌘↩.
@@ -101,6 +98,10 @@ The renderer (`src/renderer`) is bundled by esbuild into `dist/renderer`, while 
 - Multi-line results, or several outputs from one line, push later results down and out of alignment with the source. Word wrap can also break alignment.
 - Code runs in Node.js, so browser DOM APIs are not available.
 - Output from a single run is capped at 5,000 entries.
+
+## Contributing
+
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the development setup and workflow, and please follow the [Code of Conduct](CODE_OF_CONDUCT.md). Report security issues privately as described in [SECURITY.md](SECURITY.md).
 
 ## License
 
