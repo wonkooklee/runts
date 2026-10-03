@@ -43,7 +43,7 @@ function openFiles(paths) {
       if (win) send('file:opened', tab);
       else pendingFiles.push(tab);
     } catch (err) {
-      dialog.showErrorBox('파일을 열 수 없습니다', `${p}\n${err.message}`);
+      dialog.showErrorBox('Could not open file', `${p}\n${err.message}`);
     }
   }
 }

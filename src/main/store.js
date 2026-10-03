@@ -16,7 +16,7 @@ const DEFAULT_SETTINGS = {
   env: '',
 };
 
-const WELCOME = `// RunTS — 입력하면 바로 실행됩니다 (⌘R 수동 실행)
+const WELCOME = `// Welcome to RunTS. Code runs as you type (⌘R to run manually).
 const greet = (name: string) => \`Hello, \${name}!\`
 
 greet('RunTS')

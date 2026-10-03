@@ -25,7 +25,7 @@ function emit(line, kind, text) {
   if (truncated) return;
   if (++outputCount > MAX_OUTPUTS) {
     truncated = true;
-    send({ type: 'output', line, kind: 'warn', text: `… 출력이 ${MAX_OUTPUTS}개를 넘어 이후 출력은 생략합니다` });
+    send({ type: 'output', line, kind: 'warn', text: `… output exceeded ${MAX_OUTPUTS} entries; the rest is omitted` });
     return;
   }
   lastLine = line;
@@ -145,7 +145,7 @@ function makeRequire(cwd, packagesDir) {
           return fromCwd(id);
         } catch (e2) {
           if (e2 && e2.code === 'MODULE_NOT_FOUND' && String(e2.message).includes(`'${id}'`)) {
-            const err = new Error(`Cannot find module '${id}'. 패키지 창(⌘⇧P)에서 설치하세요.`);
+            const err = new Error(`Cannot find module '${id}'. Install it from npm Packages (⇧⌘P).`);
             err.code = 'MODULE_NOT_FOUND';
             throw err;
           }

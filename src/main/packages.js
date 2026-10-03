@@ -54,7 +54,7 @@ class Packages {
     const valid = names.map((n) => n.trim()).filter(Boolean);
     const invalid = valid.filter((n) => !NAME_RE.test(n));
     if (invalid.length) {
-      onLog(`잘못된 패키지 이름: ${invalid.join(', ')}\n`);
+      onLog(`Invalid package name: ${invalid.join(', ')}\n`);
       return false;
     }
     if (!valid.length) return false;
